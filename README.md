@@ -1,4 +1,4 @@
-django-lib
-==========
+django-libretto
+===============
 
-Collection of useful Django routines.
+Collection of useful Django snippets.
