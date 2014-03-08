@@ -1,0 +1,13 @@
+# Python library imports.
+import json
+
+# Django imports.
+from django.http import HttpResponse
+
+
+
+class JsonResponse(HttpResponse):
+	def __init__(self, content={}, mimetype=None, status=None, content_type=None):
+		if not content_type:
+			content_type = 'application/json'
+		super(JsonResponse, self).__init__(json.dumps(content), mimetype=mimetype, status=status, content_type=content_type)
