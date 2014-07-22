@@ -1,1 +1,1 @@
-from . import decorators, http, models, template, url
+from . import decorators, forms, http, models, template, url
