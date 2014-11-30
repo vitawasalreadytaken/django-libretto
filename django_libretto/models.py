@@ -28,7 +28,7 @@ def extendManager(mixinClass):
 	class MixinManager(models.Manager, mixinClass):
 		class MixinQuerySet(models.query.QuerySet, mixinClass):
 			pass
-		def get_query_set(self):
+		def get_queryset(self):
 			return self.MixinQuerySet(self.model, using = self._db)
 
 	return MixinManager()
