@@ -1,4 +1,5 @@
 import django.forms
+from django.utils.safestring import mark_safe
 
 
 
@@ -23,3 +24,20 @@ class FormWithDynamicChoices(django.forms.Form):
 		for fieldName, choices in fieldChoices.items():
 			if fieldName in self.fields:
 				self.fields[fieldName].choices += choices
+
+
+
+
+class AdminImageWidget(django.forms.widgets.FileInput):
+	'''
+	Show image thumbnail in addition to the standard file input controls.
+	'''
+
+	def render(self, name, value, attrs = None):
+		output = []
+		if value and getattr(value, 'url', None):
+			url = value.url
+			output.append(u'<div><a href="%s" target="_blank"><img src="%s" style="height: 100px" /></a></div>' % (url, url))
+
+		output.append(super(AdminImageWidget, self).render(name, value, attrs))
+		return mark_safe(u''.join(output))
