@@ -32,7 +32,8 @@ def pathMatches(path, urlName, **kwargs):
 	resolved = urlresolvers.resolve(path)
 
 	# Different URL name => the current URL cannot match.
-	if urlName != '{r.namespace}:{r.url_name}'.format(r = resolved):
+	resolvedName = '{r.namespace}:{r.url_name}'.format(r = resolved) if resolved.namespace else resolved.url_name
+	if urlName != resolvedName:
 		return False
 
 	# If any of the current keyword args is missing or different, the URL cannot match.
